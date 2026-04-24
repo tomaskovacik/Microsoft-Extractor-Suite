@@ -143,6 +143,18 @@ $Global:CollectionTasks = @{
             }
             Enabled = $true
         }
+        "ActivityLogs" = @{
+            Name = "ARM Activity Logs"
+            Description = "Collects Azure ARM Activity Logs for all subscriptions"
+            Function = { param($OutputDir, $LogLevel, $UserIds)
+                if (-not $UserIds) {
+                    Get-ActivityLogs -OutputDir "$OutputDir\ActivityLogs" -LogLevel $LogLevel
+                    return $true
+                }
+                return $false
+            }
+            Enabled = $true
+        }
     }
     M365 = @{
         "InboxRules" = @{
